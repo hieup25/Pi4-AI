@@ -17,5 +17,9 @@ link_directories(libs/ncnn/lib)
 #add source
 file(GLOB SOURCES "src/*.cpp")
 
+#add include
+#file(GLOB INCLUDE "src/Core/ApiSupport/*.hpp" "src/Core/Framework/ncnn/*.hpp")
+#include_directories(${INCLUDE})
+
 add_executable(test ${SOURCES})
 target_link_libraries(test ${LIB_OPENCV} ${LIB_NCNN})

@@ -36,6 +36,30 @@ Detector::~Detector()
 }
 bool Detector::init(const char* path_bin, const char* path_param)
 {
+    ncnn::Option opt_detect;
+    opt_detect.lightmode = true;
+    opt_detect.num_threads = 4;
+    // opt_detect.blob_allocator = &pool_alloc;
+    // opt_detect.workspace_allocator = &pool_alloc_workspace;
+    // opt_detect.use_packing_layout = true;
+    // opt_detect.use_fp16_arithmetic = true;
+    // opt_detect.use_fp16_storage =true;
+    // opt_detect.use_fp16_packed = true;
+    // opt_detect.use_sgemm_convolution = true;
+    // opt_detect.use_winograd_convolution = true;
+
+    this->ncnn_net.opt = opt_detect;
+    // this->ncnn_net.opt.num_threads = 4; //You need to compile with libgomp for multi thread support
+    // this->ncnn_net.opt.use_vulkan_compute = true; //You need to compile with libvulkan for gpu support
+    // this->ncnn_net.opt.use_winograd_convolution = true;
+    // this->ncnn_net.opt.use_sgemm_convolution = true;
+    // this->ncnn_net.opt.use_fp16_packed = true;
+    // this->ncnn_net.opt.use_fp16_storage = true;
+    // this->ncnn_net.opt.use_fp16_arithmetic = true;
+    // this->ncnn_net.opt.use_packing_layout = true;
+    // this->ncnn_net.opt.use_shader_pack8 = false;
+    // this->ncnn_net.opt.use_image_storage = false;
+
     int p_1 = this->ncnn_net.load_param(path_param);
     int p_2 = this->ncnn_net.load_model(path_bin);
     return (p_1 == 0 && p_2 == 0) ? true : false;

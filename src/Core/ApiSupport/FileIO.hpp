@@ -1,12 +1,16 @@
 #pragma once
+#include <fstream>
+#include <vector>
+#include <iostream>
+
 class FileIO
 {
-private:
-    /* data */
-public:
-    FileIO(/* args */);
-    ~FileIO();
-    void loadLabel(std::string path, std::vector<std::string>& vec_labels);
+    private:
+        /* data */
+    public:
+        FileIO(/* args */);
+        ~FileIO();
+        int loadLabel(std::string path, std::vector<std::string>& vec_labels);
 };
 
 FileIO::FileIO(/* args */)
@@ -16,14 +20,10 @@ FileIO::FileIO(/* args */)
 FileIO::~FileIO()
 {
 }
-#include <fstream>
-#include <vector>
-#include <iostream>
-
 int FileIO::loadLabel(std::string path, std::vector<std::string>& vec_labels)
 {
     int countLine = 0;
-	std::ifstream fileLabel(nameFile);
+	std::ifstream fileLabel(path);
 	if(!fileLabel)
     {
         printf("Reading file label error \n");
@@ -34,7 +34,7 @@ int FileIO::loadLabel(std::string path, std::vector<std::string>& vec_labels)
         std::string line;
         while (std::getline(fileLabel, line)) 
         {
-            labels.push_back(line);
+            vec_labels.push_back(line);
             countLine++;
         }
         fileLabel.close();
