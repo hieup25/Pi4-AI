@@ -14,12 +14,19 @@ set (LIB_NCNN libncnn.so)
 include_directories(libs/ncnn/include)
 link_directories(libs/ncnn/lib)
 
+#add lib mnn
+set (LIB_MNN libMNN.so)
+#include_directories(libs/mnn/include/MNN)
+include_directories(libs/mnn/include)
+
+link_directories(libs/mnn/lib)
+
 #add source
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "src/Core/Framework/mnn/*.cpp")
 
 #add include
 #file(GLOB INCLUDE "src/Core/ApiSupport/*.hpp" "src/Core/Framework/ncnn/*.hpp")
 #include_directories(${INCLUDE})
 
 add_executable(test ${SOURCES})
-target_link_libraries(test ${LIB_OPENCV} ${LIB_NCNN})
+target_link_libraries(test ${LIB_OPENCV} ${LIB_NCNN} ${LIB_MNN})
